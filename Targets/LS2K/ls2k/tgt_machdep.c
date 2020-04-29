@@ -503,6 +503,22 @@ void tgt_devconfig()
 		}
 	}
 
+	// GPIO 36 Reset PHY
+	*(volatile int *)0xbfe10420 &= ~(1<<20);
+	*(volatile int *)0xbfe10504 &= ~(1<<4);
+//	*(volatile int *)0xbfe10514 |= (1<<4);
+	delay(500);
+	*(volatile int *)0xbfe10514 &= ~(1<<4);
+	delay(3000);
+	*(volatile int *)0xbfe10514;
+	delay(1000);
+	*(volatile int *)0xbfe10514 &= ~(1<<4);
+	delay(1000);
+	*(volatile int *)0xbfe10514 &= ~(1<<4);
+	delay(4000);
+	*(volatile int *)0xbfe10514;
+	*(volatile int *)0xbfe10514 |= (1<<4);
+
 #ifdef FPGA_ON_BUS0_DEV
 {
 	unsigned int dev;
